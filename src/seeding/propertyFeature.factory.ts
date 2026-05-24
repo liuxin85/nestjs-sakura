@@ -1,6 +1,6 @@
 import { setSeederFactory } from 'typeorm-extension';
 import { Faker } from '@faker-js/faker';
-import { PropertyFeature } from '../../src/property/entities/propertyFeature.entity';
+import { PropertyFeature } from '../entities/propertyFeature.entity';
 
 export const PropertyFeatureFactory = setSeederFactory(
   PropertyFeature,
