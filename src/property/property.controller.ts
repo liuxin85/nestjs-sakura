@@ -1,60 +1,46 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
-  Header,
-  Headers,
   Param,
-  ParseBoolPipe,
   ParseIntPipe,
   Patch,
   Post,
   Query,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
-import { IdParamDto } from './dto/idParam.dto';
 import { ParseIdPipe } from './pipes/parseId.pipe';
-import { ZodValidationPipe } from './pipes/zodValidation.pipe';
-import {
-  createPropertySchema,
-  type CreatePropertyZodDto,
-} from './dto/createPropertyZod.dto';
-import { HeadersDto } from './dto/headers.dto';
-import { RequestHeader } from './pipes/request-header';
+import { PropertyService } from './property.service';
+import { UpdatepropertyDto } from './dto/updatePropety.dto';
+import { PaginationDTO } from './dto/pagination.dto';
 
 @Controller('property')
 export class PropertyController {
+  constructor(private propertyService: PropertyService) {}
+
   @Get()
-  findAll() {
-    return 'All properties';
+  findAll(@Query() paginationDTO: PaginationDTO) {
+    return this.propertyService.findAll(paginationDTO);
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id, @Query('sort', ParseBoolPipe) sort) {
-    console.log(typeof id);
-    console.log(typeof sort);
-    return id;
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.propertyService.findOne(id);
   }
 
   @Post()
-  @UsePipes(new ZodValidationPipe(createPropertySchema))
-  create(
-    @Body()
-    body: CreatePropertyZodDto,
-  ) {
-    return body;
+  create(@Body() dto: CreatePropertyDto) {
+    return this.propertyService.create(dto);
   }
 
   @Patch(':id')
-  update(
-    @Param('id', ParseIdPipe) id,
-    @Body() body: CreatePropertyDto,
+  update(@Param('id', ParseIdPipe) id, @Body() body: UpdatepropertyDto) {
+    return this.propertyService.update(id, body);
+  }
 
-    @RequestHeader(HeadersDto)
-    header: HeadersDto,
-  ) {
-    return header;
+  @Delete(':id')
+  delete(@Param('id', ParseIdPipe) id) {
+    return this.propertyService.delete(id);
   }
 }
