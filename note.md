@@ -14,3 +14,9 @@ pnpm add @nestjs/passport passport passport-local
 pnpm add @types/passport-local
 
 nest g gu auth/guards/local-auth
+
+openssl rand -hex 32
+pnpm add @nestjs/jwt passport-jwt
+pnpm add -D @types/passport-jwt
+
+nest g gu auth/guards/jwt-auth
