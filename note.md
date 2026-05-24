@@ -20,3 +20,4 @@ pnpm add @nestjs/jwt passport-jwt
 pnpm add -D @types/passport-jwt
 
 nest g gu auth/guards/jwt-auth
+nest g gu auth/guards/refresh-auth
