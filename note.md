@@ -21,3 +21,5 @@ pnpm add -D @types/passport-jwt
 
 nest g gu auth/guards/jwt-auth
 nest g gu auth/guards/refresh-auth
+
+pnpm add argon2
