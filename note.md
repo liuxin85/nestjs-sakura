@@ -23,3 +23,5 @@ nest g gu auth/guards/jwt-auth
 nest g gu auth/guards/refresh-auth
 
 pnpm add argon2
+
+nest g gu auth/guards/roles --no-spec
